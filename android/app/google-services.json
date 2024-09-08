@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "508994507198",
+    "project_id": "medicaladvisoryapp",
+    "storage_bucket": "medicaladvisoryapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508994507198:android:aed474310968d0858969ef",
+        "android_client_info": {
+          "package_name": "com.example.bot_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8GRmVmHG1W0ErunKzMJ-jPEGRXYrRl0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
