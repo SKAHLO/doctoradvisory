@@ -57,7 +57,7 @@ class _LogInState extends State<LogIn> {
             Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
-                  "images/car.PNG",
+                  "assets/surgeon.png",
                   fit: BoxFit.cover,
                 )),
             SizedBox(
@@ -183,7 +183,7 @@ class _LogInState extends State<LogIn> {
                     AuthMethods().signInWithGoogle(context);
                   },
                   child: Image.asset(
-                    "images/google.png",
+                    "assets/google.png",
                     height: 45,
                     width: 45,
                     fit: BoxFit.cover,
@@ -197,7 +197,7 @@ class _LogInState extends State<LogIn> {
                     AuthMethods().signInWithApple();
                   },
                   child: Image.asset(
-                    "images/apple1.png",
+                    "assets/apple1.png",
                     height: 50,
                     width: 50,
                     fit: BoxFit.cover,
