@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:508994507198:android:aed474310968d0858969ef",
+        "mobilesdk_app_id": "1:508994507198:android:cfacd994a09c6aac8969ef",
         "android_client_info": {
-          "package_name": "com.example.bot_app"
+          "package_name": "com.doctor.advisory"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "508994507198-2t7t9caflfl5as5fbqcn4u7otsi7721u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA8GRmVmHG1W0ErunKzMJ-jPEGRXYrRl0s"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508994507198-2t7t9caflfl5as5fbqcn4u7otsi7721u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
