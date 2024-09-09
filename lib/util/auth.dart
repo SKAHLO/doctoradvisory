@@ -1,3 +1,4 @@
+import 'package:bot_app/screen/dashboard_screen.dart';
 import 'package:bot_app/screen/home_page.dart';
 import 'package:bot_app/util/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,8 +42,8 @@ class AuthMethods {
       await DatabaseMethods()
           .addUser(userDetails.uid, userInfoMap)
           .then((value) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Home()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const DashboardScreen()));
       });
     }
   }

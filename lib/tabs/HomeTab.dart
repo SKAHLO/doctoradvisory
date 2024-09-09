@@ -2,6 +2,7 @@ import 'package:bot_app/screen/doctor_detail.dart';
 import 'package:bot_app/styles/colors.dart';
 import 'package:bot_app/styles/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:bot_app/screen/chat_screen.dart';
 
 List<Map> doctors = [
   {
@@ -53,22 +54,17 @@ class HomeTab extends StatelessWidget {
                 color: const Color.fromARGB(95, 179, 173, 173),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(
-                    Icons.search,
-                    size: 32,
-                    color: Colors.black54,
+                  FilledButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ChatScreen()),
+                      );
+                    },
+                    child: const Text('Chat With A Virtual Doctor'),
                   ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    "Chat with our Virtual Doctor",
-                    style: TextStyle(
-                      color: Colors.black54,
-                    ),
-                  )
                 ],
               ),
             ),
@@ -155,7 +151,9 @@ class TopDoctorCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SliverDoctorDetail()),);
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const SliverDoctorDetail()),
+          );
         },
         child: Row(
           children: [

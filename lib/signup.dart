@@ -57,14 +57,16 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
                   "assets/surgeon.png",
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  width: 200,
+                  height: 200,
                 )),
             const SizedBox(
               height: 30.0,
@@ -76,8 +78,8 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   children: [
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
                           color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
@@ -100,8 +102,8 @@ class _SignUpState extends State<SignUp> {
                       height: 30.0,
                     ),
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
                           color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
@@ -124,8 +126,8 @@ class _SignUpState extends State<SignUp> {
                       height: 30.0,
                     ),
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
                           color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
@@ -202,7 +204,7 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   width: 30.0,
                 ),
-               FaIcon(
+                FaIcon(
                   FontAwesomeIcons.apple,
                   size: 50,
                 ),
