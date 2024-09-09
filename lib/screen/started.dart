@@ -68,7 +68,7 @@ class _StartedPageState extends State<StartedPage> {
                   InkWell(
                     onTap: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return const HomePage();
+                      return const Home();
                     })),
                     child: Container(
                       height: 56,
