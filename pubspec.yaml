@@ -32,12 +32,16 @@ dependencies:
   cloud_firestore: ^5.0.1
   firebase_auth: ^5.1.0
   firebase_core: ^3.1.0
+  firebase_storage: ^12.3.0
   flutter:
     sdk: flutter
   flutter_markdown: ^0.6.19
   font_awesome_flutter: ^10.7.0
   google_generative_ai: ^0.4.1
   google_sign_in:
+  image_picker: ^1.1.2
+  json_annotation: ^4.9.0
+  path: ^1.9.0
   rename: ^3.0.2
   the_apple_sign_in: ^1.1.1
 
@@ -61,6 +65,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.11
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

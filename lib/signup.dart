@@ -1,3 +1,5 @@
+import 'package:bot_app/models/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bot_app/screen/login.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,16 @@ class _SignUpState extends State<SignUp> {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
+
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set(AuthUser(
+              id: userCredential.user!.uid,
+              username: namecontroller.text,
+              profilePicsture: 'https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg',
+            ).toJson());
+
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
           "Registered Successfully",
@@ -76,8 +88,8 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   children: [
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
                           color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
@@ -100,8 +112,8 @@ class _SignUpState extends State<SignUp> {
                       height: 30.0,
                     ),
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
                           color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
@@ -124,8 +136,8 @@ class _SignUpState extends State<SignUp> {
                       height: 30.0,
                     ),
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
                           color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
@@ -202,7 +214,7 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   width: 30.0,
                 ),
-               FaIcon(
+                FaIcon(
                   FontAwesomeIcons.apple,
                   size: 50,
                 ),
