@@ -69,14 +69,16 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
                   "assets/surgeon.png",
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  width: 200,
+                  height: 200,
                 )),
             const SizedBox(
               height: 30.0,

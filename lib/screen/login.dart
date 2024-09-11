@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bot_app/screen/started.dart';
+import 'package:bot_app/screen/home_page.dart';
 import 'package:bot_app/util/auth.dart';
 import 'package:bot_app/widget/forgot_password.dart';
 import 'package:bot_app/signup.dart';
@@ -27,8 +27,8 @@ class _LogInState extends State<LogIn> {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const StartedPage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
