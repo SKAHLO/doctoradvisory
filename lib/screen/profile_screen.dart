@@ -140,52 +140,54 @@ Future<void> _saveProfile() async {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: _showImagePickerOptions,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage: _profileImage != null
-                        ? FileImage(_profileImage!)
-                        : const AssetImage('assets/profile_placeholder.png')
-                            as ImageProvider,
-                    child: _profileImage == null
-                        ? Icon(
-                            Icons.camera_alt,
-                            size: 50,
-                            color: Colors.grey[700],
-                          )
-                        : null,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: _showImagePickerOptions,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: _profileImage != null
+                          ? FileImage(_profileImage!)
+                          : const AssetImage('assets/profile_placeholder.png')
+                              as ImageProvider,
+                      child: _profileImage == null
+                          ? Icon(
+                              Icons.camera_alt,
+                              size: 50,
+                              color: Colors.grey[700],
+                            )
+                          : null,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text('Change Profile Picture')
-              ],
-            ),
-            const SizedBox(height: 20),
-            const Text('Edit Username'),
-            const SizedBox(height: 10),
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Username',
-                border: OutlineInputBorder(),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text('Change Profile Picture')
+                ],
               ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child:isLoading? const CircularProgressIndicator():ElevatedButton(
-                onPressed: _saveProfile,
-                child: const Text('Save'),
+              const SizedBox(height: 20),
+              const Text('Edit Username'),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Center(
+                child:isLoading? const CircularProgressIndicator():ElevatedButton(
+                  onPressed: _saveProfile,
+                  child: const Text('Save'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
