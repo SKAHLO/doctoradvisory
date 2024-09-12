@@ -34,7 +34,7 @@ class _SignUpState extends State<SignUp> {
             .set(AuthUser(
               id: userCredential.user!.uid,
               username: namecontroller.text,
-              profilePicsture: 'https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg',
+              profilepicture: 'https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg',
             ).toJson());
 
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

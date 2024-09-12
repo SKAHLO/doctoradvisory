@@ -6,12 +6,12 @@ part 'users.g.dart';
 class AuthUser {
   final String id;
   final String username;
-  final String profilePicsture;
+  final String profilepicture;
 
     factory AuthUser.fromJson(Map<String, dynamic> json) =>
       _$AuthUserFromJson(json);
 
-  AuthUser({required this.id, required this.username, required this.profilePicsture});
+  AuthUser({required this.id, required this.username, required this.profilepicture});
 
   Map<String, dynamic> toJson() => _$AuthUserToJson(this);
 }

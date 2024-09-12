@@ -9,11 +9,11 @@ part of 'users.dart';
 AuthUser _$AuthUserFromJson(Map<String, dynamic> json) => AuthUser(
       id: json['id'] as String,
       username: json['username'] as String,
-      profilePicsture: json['profilePicsture'] as String,
+      profilepicture: json['profilepicture'] as String,
     );
 
 Map<String, dynamic> _$AuthUserToJson(AuthUser instance) => <String, dynamic>{
       'id': instance.id,
       'username': instance.username,
-      'profilePicsture': instance.profilePicsture,
+      'profilepicture': instance.profilepicture,
     };
