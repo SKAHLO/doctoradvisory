@@ -28,79 +28,79 @@ class _UserProfileState extends State<UserProfile> {
       });
     }
   }
-Future<void> _saveProfile() async {
-  setState(() {
-    isLoading = true;
-  });
 
-  String username = _usernameController.text.trim();
-
-  // Validate if the username is empty
-  if (username.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Please enter a username')),
-    );
+  Future<void> _saveProfile() async {
     setState(() {
-      isLoading = false;
+      isLoading = true;
     });
-    return;
+
+    String username = _usernameController.text.trim();
+
+    // Validate if the username is empty
+    if (username.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a username')),
+      );
+      setState(() {
+        isLoading = false;
+      });
+      return;
+    }
+
+    // Validate if an image is selected
+    if (_profileImage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a profile image')),
+      );
+      setState(() {
+        isLoading = false;
+      });
+      return;
+    }
+
+    try {
+      // Get the user's ID from FirebaseAuth
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+
+      // Upload the profile image to Firebase Storage
+      String fileName = path.basename(_profileImage!.path);
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('profile_images/$userId/$fileName');
+
+      UploadTask uploadTask = storageReference.putFile(_profileImage!);
+      TaskSnapshot taskSnapshot = await uploadTask;
+
+      // Get the image URL after uploading
+      String imageUrl = await taskSnapshot.ref.getDownloadURL();
+
+      // Update the user's data in Firestore
+      await FirebaseFirestore.instance.collection('users').doc(userId).update({
+        'username': username,
+        'profilepicture': imageUrl,
+      });
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Profile updated successfully!')),
+      );
+
+      // Navigate to the home page
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => const HomePage()),
+        (_) => false,
+      );
+    } catch (e) {
+      // Handle errors (e.g., network issues, Firebase issues)
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error saving profile: $e')),
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
-
-  // Validate if an image is selected
-  if (_profileImage == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Please select a profile image')),
-    );
-    setState(() {
-      isLoading = false;
-    });
-    return;
-  }
-
-  try {
-    // Get the user's ID from FirebaseAuth
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-
-    // Upload the profile image to Firebase Storage
-    String fileName = path.basename(_profileImage!.path);
-    Reference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('profile_images/$userId/$fileName');
-
-    UploadTask uploadTask = storageReference.putFile(_profileImage!);
-    TaskSnapshot taskSnapshot = await uploadTask;
-
-    // Get the image URL after uploading
-    String imageUrl = await taskSnapshot.ref.getDownloadURL();
-
-    // Update the user's data in Firestore
-    await FirebaseFirestore.instance.collection('users').doc(userId).update({
-      'username': username,
-      'profilepicture': imageUrl,
-    });
-
-    // Show success message
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Profile updated successfully!')),
-    );
-
-    // Navigate to the home page
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const HomePage()), 
-      (_) => false,
-    );
-  } catch (e) {
-    // Handle errors (e.g., network issues, Firebase issues)
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error saving profile: $e')),
-    );
-  } finally {
-    setState(() {
-      isLoading = false;
-    });
-  }
-}
-
 
   void _showImagePickerOptions() {
     showModalBottomSheet(
@@ -137,55 +137,65 @@ Future<void> _saveProfile() async {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Profile'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: _showImagePickerOptions,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage: _profileImage != null
-                        ? FileImage(_profileImage!)
-                        : const AssetImage('assets/profile_placeholder.png')
-                            as ImageProvider,
-                    child: _profileImage == null
-                        ? Icon(
-                            Icons.camera_alt,
-                            size: 50,
-                            color: Colors.grey[700],
-                          )
-                        : null,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: _showImagePickerOptions,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: _profileImage != null
+                          ? FileImage(_profileImage!)
+                          : const AssetImage('assets/profile_placeholder.png')
+                              as ImageProvider,
+                      child: _profileImage == null
+                          ? Icon(
+                              Icons.camera_alt,
+                              size: 50,
+                              color: Colors.grey[700],
+                            )
+                          : null,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text('Change Profile Picture')
-              ],
-            ),
-            const SizedBox(height: 20),
-            const Text('Edit Username'),
-            const SizedBox(height: 10),
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Username',
-                border: OutlineInputBorder(),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text('Change Profile Picture')
+                ],
               ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child:isLoading? const CircularProgressIndicator():ElevatedButton(
-                onPressed: _saveProfile,
-                child: const Text('Save'),
+              const SizedBox(height: 20),
+              const Text('Edit Username'),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Center(
+                child: isLoading
+                    ? const CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: _saveProfile,
+                        child: const Text('Save'),
+                      ),
+              ),
+            ],
+          ),
         ),
       ),
     );

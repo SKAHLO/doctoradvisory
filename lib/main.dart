@@ -32,6 +32,7 @@ class MainApp extends StatelessWidget {
           return snapShot.data == null ? const LogIn() : const HomePage();
         },
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
