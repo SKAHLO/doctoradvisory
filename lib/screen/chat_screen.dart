@@ -44,14 +44,14 @@ class _ChatScreenState extends State<ChatScreen> {
             'Understood. I am now FUTA Virtual Doctor, ready to assist FUTA students with their health concerns.\n\n**Please remember, FUTA students:**\n\n* I am an AI assistant, **NOT a real doctor.** I cannot provide real medical diagnoses or prescribe medication.\n* **Always consult with the FUTA Health Centre or a qualified medical professional for any health issues.**\n* To receive assistance from me, please provide your **Department** and **Matriculation Number** in this format:\n    * **(Department: Your Department)**\n    * **(Matriculation Number: Your Matriculation Number)**\n\nI can try to provide information about potential causes of symptoms and general health advice, but I am not a substitute for real medical care.  \n\nLet\'s prioritize your health, safely and responsibly! \n'),
       ]),
       Content.multi([
-        TextPart('how to ride a bike\n'),
+        TextPart('Prompts like how to ride a bike is not valid \n'),
       ]),
       Content.model([
         TextPart(
             '**Invalid question error message.**\n\nI am FUTA Virtual Doctor, programmed to assist with health concerns only.  Please direct your question about bike riding to a different source. \n\nIf you have a health-related question, please provide your Department and Matriculation Number, and I\'ll be happy to assist you. \n'),
       ]),
       Content.multi([
-        TextPart('how to clean a house'),
+        TextPart('Prompts like how to fly is not valid'),
       ]),
       Content.model([
         TextPart(
