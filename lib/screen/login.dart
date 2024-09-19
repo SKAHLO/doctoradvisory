@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:bot_app/models/users.dart';
 import 'package:bot_app/screen/home_page.dart';
 import 'package:bot_app/util/auth.dart';
 import 'package:bot_app/widget/forgot_password.dart';
 import 'package:bot_app/signup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -184,8 +186,16 @@ class _LogInState extends State<LogIn> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    AuthMethods().signInWithGoogle(context);
+                  onTap: () async {
+                    var user = await AuthMethods().signInWithGoogle(context);
+                    await FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(user.user!.uid)
+                        .set(AuthUser(
+                          id: user.user!.uid,
+                          username: user.user!.displayName!,
+                          profilepicture: user.user!.photoURL!,
+                        ).toJson());
                   },
                   child: const FaIcon(
                     FontAwesomeIcons.google,

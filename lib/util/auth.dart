@@ -1,4 +1,3 @@
-
 import 'package:bot_app/screen/home_page.dart';
 import 'package:bot_app/util/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +13,7 @@ class AuthMethods {
     return await auth.currentUser;
   }
 
-  signInWithGoogle(BuildContext context) async {
+ Future<UserCredential> signInWithGoogle(BuildContext context) async {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -50,6 +49,7 @@ class AuthMethods {
         );
       });
     }
+    return result;
   }
 
   Future<User> signInWithApple({List<Scope> scopes = const []}) async {
