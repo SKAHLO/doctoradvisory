@@ -13,7 +13,7 @@ class AuthMethods {
     return await auth.currentUser;
   }
 
-  signInWithGoogle(BuildContext context) async {
+ Future<UserCredential> signInWithGoogle(BuildContext context) async {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -42,9 +42,14 @@ class AuthMethods {
           .addUser(userDetails.uid, userInfoMap)
           .then((value) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
       });
     }
+    return result;
   }
 
   Future<User> signInWithApple({List<Scope> scopes = const []}) async {

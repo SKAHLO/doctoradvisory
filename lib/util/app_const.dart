@@ -1,3 +1,3 @@
-const String apiKey = "AIzaSyCwR0U2k4t2i_PEmLLkzYetO0m440O19B0";
-const String geminiModel = "gemini-pro";
-const String geminiVisionModel = "gemini-pro-vision";
+const String apiKey = "AIzaSyBnN0zTOaY6gDQI69LnIc4Ha5olIbJL8GU";
+const String geminiModel = "gemini-1.5-pro";
+const String geminiVisionModel = "gemini-1.5-pro-vison";

@@ -1,11 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bot_app/screen/started.dart';
+import 'package:bot_app/models/users.dart';
+import 'package:bot_app/screen/home_page.dart';
 import 'package:bot_app/util/auth.dart';
 import 'package:bot_app/widget/forgot_password.dart';
 import 'package:bot_app/signup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -27,17 +30,17 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => StartedPage()));
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.orangeAccent,
             content: Text(
               "No User Found for that Email",
               style: TextStyle(fontSize: 18.0),
             )));
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.orangeAccent,
             content: Text(
               "Wrong Password Provided by User",
@@ -51,16 +54,18 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
-                  "images/car.PNG",
-                  fit: BoxFit.cover,
+                  "assets/surgeon.png",
+                  fit: BoxFit.contain,
+                  width: 200,
+                  height: 200,
                 )),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
             Padding(
@@ -70,10 +75,10 @@ class _LogInState extends State<LogIn> {
                 child: Column(
                   children: [
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
-                          color: Color(0xFFedf0f8),
+                          color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
                       child: TextFormField(
                         validator: (value) {
@@ -83,21 +88,21 @@ class _LogInState extends State<LogIn> {
                           return null;
                         },
                         controller: mailcontroller,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "Email",
                             hintStyle: TextStyle(
                                 color: Color(0xFFb2b7bf), fontSize: 18.0)),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2.0, horizontal: 30.0),
                       decoration: BoxDecoration(
-                          color: Color(0xFFedf0f8),
+                          color: const Color(0xFFedf0f8),
                           borderRadius: BorderRadius.circular(30)),
                       child: TextFormField(
                         controller: passwordcontroller,
@@ -107,7 +112,7 @@ class _LogInState extends State<LogIn> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "Password",
                             hintStyle: TextStyle(
@@ -115,7 +120,7 @@ class _LogInState extends State<LogIn> {
                         obscureText: true,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     GestureDetector(
@@ -130,12 +135,12 @@ class _LogInState extends State<LogIn> {
                       },
                       child: Container(
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 13.0, horizontal: 30.0),
                           decoration: BoxDecoration(
-                              color: Color(0xFF273671),
+                              color: const Color(0xFF273671),
                               borderRadius: BorderRadius.circular(30)),
-                          child: Center(
+                          child: const Center(
                               child: Text(
                             "Sign In",
                             style: TextStyle(
@@ -148,83 +153,91 @@ class _LogInState extends State<LogIn> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ForgotPassword()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ForgotPassword()));
               },
-              child: Text("Forgot Password?",
+              child: const Text("Forgot Password?",
                   style: TextStyle(
                       color: Color(0xFF8c8e98),
                       fontSize: 18.0,
                       fontWeight: FontWeight.w500)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
-            Text(
+            const Text(
               "or LogIn with",
               style: TextStyle(
                   color: Color(0xFF273671),
                   fontSize: 22.0,
                   fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    AuthMethods().signInWithGoogle(context);
+                  onTap: () async {
+                    var user = await AuthMethods().signInWithGoogle(context);
+                    await FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(user.user!.uid)
+                        .set(AuthUser(
+                          id: user.user!.uid,
+                          username: user.user!.displayName!,
+                          profilepicture: user.user!.photoURL!,
+                        ).toJson());
                   },
-                  child: Image.asset(
-                    "images/google.png",
-                    height: 45,
-                    width: 45,
-                    fit: BoxFit.cover,
+                  child: const FaIcon(
+                    FontAwesomeIcons.google,
+                    size: 50,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30.0,
                 ),
                 GestureDetector(
                   onTap: () {
                     AuthMethods().signInWithApple();
                   },
-                  child: Image.asset(
-                    "images/apple1.png",
-                    height: 50,
-                    width: 50,
-                    fit: BoxFit.cover,
+                  child: const FaIcon(
+                    FontAwesomeIcons.apple,
+                    size: 50,
                   ),
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Don't have an account?",
+                const Text("Don't have an account?",
                     style: TextStyle(
                         color: Color(0xFF8c8e98),
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500)),
-                SizedBox(
+                const SizedBox(
                   width: 5.0,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUp()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUp()));
                   },
-                  child: Text(
+                  child: const Text(
                     "SignUp",
                     style: TextStyle(
                         color: Color(0xFF273671),
