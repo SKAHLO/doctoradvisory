@@ -23,25 +23,45 @@ class ChatTextFormField extends StatelessWidget {
       controller: controller,
       readOnly: isReadOnly,
       onFieldSubmitted: onFieldSubmitted,
+      maxLines: null,
+      textInputAction: TextInputAction.newline,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(16),
-        hintText: "Enter Your Prompt",
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        hintText: "Type your message here...",
+        hintStyle: TextStyle(
+          color: Theme.of(context).colorScheme.secondary.withOpacity(0.7),
+        ),
+        filled: true,
+        fillColor: Theme.of(context).colorScheme.surface,
         border: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(32)),
+          borderRadius: BorderRadius.circular(24),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(32)),
+          borderRadius: BorderRadius.circular(24),
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.primary,
+            width: 2,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(24),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
           ),
         ),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please Enter Some Text';
+          return 'Please enter your message';
         }
         return null;
       },

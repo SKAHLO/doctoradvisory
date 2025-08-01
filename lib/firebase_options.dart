@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -54,9 +51,21 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA8GRmVmHG1W0ErunKzMJ-jPEGRXYrRl0s',
-    appId: '1:508994507198:android:cfacd994a09c6aac8969ef',
+    appId: '1:508994507198:android:45d30b8dcc498e6b8969ef',
     messagingSenderId: '508994507198',
     projectId: 'medicaladvisoryapp',
     storageBucket: 'medicaladvisoryapp.appspot.com',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCpvabSW73spfcZMWTwlOzjUaRshwEEdto',
+    appId: '1:508994507198:ios:8006130e3637a5ed8969ef',
+    messagingSenderId: '508994507198',
+    projectId: 'medicaladvisoryapp',
+    storageBucket: 'medicaladvisoryapp.appspot.com',
+    androidClientId: '508994507198-gbbq5m1ic270ms83ckcr1920djh85bvu.apps.googleusercontent.com',
+    iosClientId: '508994507198-2tjs8ac9q1oul18120k4doobss8hn705.apps.googleusercontent.com',
+    iosBundleId: 'y',
+  );
+
 }
