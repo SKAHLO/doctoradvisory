@@ -61,7 +61,8 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "Welcome back,",
                                 style: TextStyle(
-                                  color: Theme.of(context).colorScheme.secondary,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -70,7 +71,9 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 data['username'],
                                 style: TextStyle(
-                                  color: Theme.of(context).colorScheme.onBackground,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24,
                                 ),
@@ -94,15 +97,17 @@ class _HomePageState extends State<HomePage> {
                             ),
                             child: CircleAvatar(
                               radius: 32,
-                              backgroundColor: Theme.of(context).colorScheme.surface,
-                              backgroundImage: NetworkImage(data['profilepicture']),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surface,
+                              backgroundImage:
+                                  NetworkImage(data['profilepicture']),
                             ),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 32),
-                    
+
                     // Main Health Card
                     Card(
                       elevation: 8,
@@ -114,7 +119,10 @@ class _HomePageState extends State<HomePage> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                              Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.1),
                               Theme.of(context).colorScheme.surface,
                             ],
                           ),
@@ -126,11 +134,14 @@ class _HomePageState extends State<HomePage> {
                                 Container(
                                   padding: const EdgeInsets.all(16),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: Image.asset(
-                                    "assets/surgeon.png",
+                                    "assets/docy.png",
                                     width: 80,
                                     height: 80,
                                   ),
@@ -138,12 +149,15 @@ class _HomePageState extends State<HomePage> {
                                 const SizedBox(width: 20),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "How are you feeling today?",
                                         style: TextStyle(
-                                          color: Theme.of(context).colorScheme.onSurface,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
                                           fontSize: 22,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -152,7 +166,9 @@ class _HomePageState extends State<HomePage> {
                                       Text(
                                         "Get instant medical advice from our AI doctor",
                                         style: TextStyle(
-                                          color: Theme.of(context).colorScheme.secondary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -162,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             const SizedBox(height: 24),
-                            
+
                             // Action Buttons Row
                             Column(
                               children: [
@@ -174,13 +190,15 @@ class _HomePageState extends State<HomePage> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (_) => const ChatScreen()),
+                                                builder: (_) =>
+                                                    const ChatScreen()),
                                           );
                                         },
                                         icon: const Icon(Icons.chat),
                                         label: const Text('Start Chat'),
                                         style: FilledButton.styleFrom(
-                                          padding: const EdgeInsets.symmetric(vertical: 16),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 16),
                                         ),
                                       ),
                                     ),
@@ -191,14 +209,17 @@ class _HomePageState extends State<HomePage> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (_) => const HospitalSearchScreen()),
+                                                builder: (_) =>
+                                                    const HospitalSearchScreen()),
                                           );
                                         },
                                         icon: const Icon(Icons.search),
                                         label: const Text('Find Hospitals'),
                                         style: FilledButton.styleFrom(
-                                          backgroundColor: const Color(0xFF718096),
-                                          padding: const EdgeInsets.symmetric(vertical: 16),
+                                          backgroundColor:
+                                              const Color(0xFF718096),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 16),
                                         ),
                                       ),
                                     ),
@@ -212,14 +233,17 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) => EmergencyServices()),
+                                            builder: (_) =>
+                                                EmergencyServices()),
                                       );
                                     },
                                     icon: const Icon(Icons.local_hospital),
                                     label: const Text('Emergency Services'),
                                     style: FilledButton.styleFrom(
-                                      backgroundColor: Theme.of(context).colorScheme.primary,
-                                      padding: const EdgeInsets.symmetric(vertical: 16),
+                                      backgroundColor:
+                                          Theme.of(context).colorScheme.primary,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
                                     ),
                                   ),
                                 ),
@@ -229,9 +253,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(height: 24),
-                    
+
                     // Features Section
                     Text(
                       "Features",
@@ -242,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Feature Cards
                     Column(
                       children: [
@@ -257,14 +281,18 @@ class _HomePageState extends State<HomePage> {
                                       Icon(
                                         Icons.smart_toy,
                                         size: 40,
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
                                         "AI Diagnosis",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          color: Theme.of(context).colorScheme.onSurface,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -273,7 +301,9 @@ class _HomePageState extends State<HomePage> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: Theme.of(context).colorScheme.secondary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                         ),
                                       ),
                                     ],
@@ -291,14 +321,18 @@ class _HomePageState extends State<HomePage> {
                                       Icon(
                                         Icons.location_on,
                                         size: 40,
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
                                         "Find Hospitals",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          color: Theme.of(context).colorScheme.onSurface,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -307,7 +341,9 @@ class _HomePageState extends State<HomePage> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: Theme.of(context).colorScheme.secondary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                         ),
                                       ),
                                     ],
@@ -329,14 +365,18 @@ class _HomePageState extends State<HomePage> {
                                       Icon(
                                         Icons.schedule,
                                         size: 40,
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
                                         "24/7 Available",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          color: Theme.of(context).colorScheme.onSurface,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -345,7 +385,9 @@ class _HomePageState extends State<HomePage> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: Theme.of(context).colorScheme.secondary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                         ),
                                       ),
                                     ],
@@ -363,14 +405,18 @@ class _HomePageState extends State<HomePage> {
                                       Icon(
                                         Icons.emergency,
                                         size: 40,
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
                                         "Emergency",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          color: Theme.of(context).colorScheme.onSurface,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -379,7 +425,9 @@ class _HomePageState extends State<HomePage> {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: Theme.of(context).colorScheme.secondary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                         ),
                                       ),
                                     ],
@@ -391,9 +439,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 32),
-                    
+
                     // Logout Button
                     SizedBox(
                       width: double.infinity,
@@ -409,7 +457,8 @@ class _HomePageState extends State<HomePage> {
                         icon: const Icon(Icons.logout),
                         label: const Text('Sign Out'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.secondary,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                       ),

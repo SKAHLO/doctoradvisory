@@ -71,7 +71,7 @@ class _LogInState extends State<LogIn> {
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                 ),
                 child: Image.asset(
-                  "assets/surgeon.png",
+                  "assets/docy.png",
                   fit: BoxFit.contain,
                 ),
               ),

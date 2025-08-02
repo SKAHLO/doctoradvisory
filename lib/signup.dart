@@ -87,7 +87,7 @@ class _SignUpState extends State<SignUp> {
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                 ),
                 child: Image.asset(
-                  "assets/surgeon.png",
+                  "assets/docy.png",
                   fit: BoxFit.contain,
                 ),
               ),
