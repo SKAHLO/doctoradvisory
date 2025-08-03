@@ -80,7 +80,7 @@ class _LogInState extends State<LogIn> {
 
               // Welcome Text
               Text(
-                "AI Healthcare",
+                "MedHealth AI",
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,

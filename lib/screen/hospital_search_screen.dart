@@ -48,6 +48,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
   List<Hospital> _filteredHospitals = [];
   TextEditingController _searchController = TextEditingController();
   String _selectedFilter = 'All';
+  bool _hasSearchText = false;
 
   @override
   void initState() {
@@ -170,6 +171,8 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
   }
 
   Future<void> _getCurrentLocation() async {
+    if (_isLoadingLocation) return; // Prevent multiple simultaneous calls
+    
     setState(() {
       _isLoadingLocation = true;
     });
@@ -221,6 +224,7 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
   void _filterHospitals() {
     String query = _searchController.text.toLowerCase();
     setState(() {
+      _hasSearchText = _searchController.text.isNotEmpty;
       _filteredHospitals = _hospitals.where((hospital) {
         bool matchesSearch = hospital.name.toLowerCase().contains(query) ||
             hospital.address.toLowerCase().contains(query) ||
@@ -331,11 +335,12 @@ class _HospitalSearchScreenState extends State<HospitalSearchScreen> {
                   decoration: InputDecoration(
                     hintText: 'Search hospitals, services...',
                     prefixIcon: const Icon(Icons.search),
-                    suffixIcon: _searchController.text.isNotEmpty
+                    suffixIcon: _hasSearchText
                         ? IconButton(
                             icon: const Icon(Icons.clear),
                             onPressed: () {
                               _searchController.clear();
+                              _filterHospitals();
                             },
                           )
                         : null,

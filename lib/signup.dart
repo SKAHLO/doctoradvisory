@@ -96,7 +96,7 @@ class _SignUpState extends State<SignUp> {
 
               // Welcome Text
               Text(
-                "Create Account",
+                "Medhealth AI App",
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
